@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="style.css">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--<title>Responsive Regisration Form </title>-->
+    <style>
+        /* ===== Google Font Import - Poppins ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #4070f4;
+            padding: 63px;
+        }
+
+        .container {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            border-radius: 6px;
+            padding: 30px;
+            margin: 0 15px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container header {
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .container header::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            height: 3px;
+            width: 27px;
+            border-radius: 8px;
+            background-color: #4070f4;
+        }
+
+        .container form {
+            position: relative;
+            margin-top: 16px;
+            min-height: 840px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .container form .form {
+            position: absolute;
+            background-color: #fff;
+            transition: 0.3s ease;
+        }
+
+        .container form .form.second {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(100%);
+        }
+
+        form.secActive .form.second {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        form.secActive .form.first {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-100%);
+        }
+
+        .container form .title {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 6px 0;
+            color: #333;
+        }
+
+        .container form .fields {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        form .fields .input-field {
+            display: flex;
+            width: calc(100% / 3 - 15px);
+            flex-direction: column;
+            margin: 4px 0;
+        }
+
+        .input-field label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #2e2e2e;
+        }
+
+        .input-field input,
+        select {
+            outline: none;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            padding: 0 15px;
+            height: 42px;
+            margin: 8px 0;
+        }
+
+        .input-field input :focus,
+        .input-field select:focus {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+        }
+
+        .input-field select,
+        .input-field input[type="date"] {
+            color: #707070;
+        }
+
+        .input-field input[type="date"]:valid {
+            color: #333;
+        }
+
+        .container form button,
+        .backBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 45px;
+            max-width: 200px;
+            width: 100%;
+            border: none;
+            outline: none;
+            color: #fff;
+            border-radius: 5px;
+            margin: 25px 0;
+            background-color: #4070f4;
+            transition: all 0.3s linear;
+            cursor: pointer;
+        }
+
+        .container form .btnText {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        form button:hover {
+            background-color: #265df2;
+        }
+
+        form button i,
+        form .backBtn i {
+            margin: 0 6px;
+        }
+
+        form .backBtn i {
+            transform: rotate(180deg);
+        }
+
+        form .buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        form .buttons button,
+        .backBtn {
+            margin-right: 14px;
+        }
+
+        @media (max-width: 750px) {
+            .container form {
+                overflow-y: scroll;
+            }
+
+            .container form::-webkit-scrollbar {
+                display: none;
+            }
+
+            form .fields .input-field {
+                width: calc(100% / 2 - 15px);
+            }
+        }
+
+        @media (max-width: 550px) {
+            form .fields .input-field {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>Registration</header>
+
+        <form action="#">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">Personal Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Date of Birth</label>
+                            <input type="date" placeholder="Enter birth date" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Email</label>
+                            <input type="text" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Mobile Number</label>
+                            <input type="number" placeholder="Enter mobile number" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Gender</label>
+                            <select required>
+                                <option disabled selected>Select gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Occupation</label>
+                            <input type="text" placeholder="Enter your ccupation" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details ID">
+                    <span class="title">Property Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Property name</label>
+                            <input type="text" placeholder="Enter Property Name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Property price</label>
+                            <input type="number" placeholder="Enter property price" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Offer Type</label>
+                            <select required>
+                                <option disabled selected>Select type</option>
+                                <option>Sale</option>
+                                <option>Resale</option>
+                                <option>Rent</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Property Type</label>
+                            <select required>
+                                <option disabled selected>Select Property type</option>
+                                <option>Appartment</option>
+                                <option>Home</option>
+                                <option>Flat</option>
+                                <option>Villa</option>
+                                <option>Shop</option>
+                                <option>TownHouse</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Property Status</label>
+                            <select required>
+                                <option disabled selected>Select Status</option>
+                                <option>Ready to Move</option>
+                                <option>Under construction</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Furnished status</label>
+                            <select required>
+                                <option disabled selected>Select Status</option>
+                                <option>Furnished</option>
+                                <option>Semi-Furnished</option>
+                                <option>Un-Furnished</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>How many BHK</label>
+                            <select required>
+                                <option disabled selected>Select BHK</option>
+                                <option>1BHK</option>
+                                <option>2BHK</option>
+                                <option>3BHK</option>
+                                <option>4BHK</option>
+                                <option>5BHK</option>
+                                <option>6BHK</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>How many Bedrooms</label>
+                            <select required>
+                                <option disabled selected>Select Bedrooms</option>
+                                <option>1Bedrooms</option>
+                                <option>2Bedrooms</option>
+                                <option>3Bedrooms</option>
+                                <option>4Bedrooms</option>
+                                <option>5Bedrooms</option>
+                                <option>6Bedrooms</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>How many Bathrooms</label>
+                            <select required>
+                                <option disabled selected>Select Bathrooms</option>
+                                <option>1Bathroom</option>
+                                <option>2Bathroom</option>
+                                <option>3Bathroom</option>
+                                <option>4Bathroom</option>
+                                <option>5Bathroom</option>
+                                <option>6Bathroom</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>How many Balconys</label>
+                            <select required>
+                                <option disabled selected>Select Balconys</option>
+                                <option>1Balconys</option>
+                                <option>2Balconys</option>
+                                <option>3Balconys</option>
+                                <option>4Balconys</option>
+                                <option>5Balconys</option>
+                                <option>6Balconys</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>how many kitchen</label>
+                            <input type="number" placeholder="No of Kitchen" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Carpet area</label>
+                            <input type="number" placeholder="How many Squarefits?" required>
+                        </div>
+                        
+                        <div class="input-field">
+                            <label>how many balconys</label>
+                            <input type="number" placeholder="No of balcony" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>property age</label>
+                            <input type="text" placeholder="Enter property age" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Total floors</label>
+                            <input type="text" placeholder="Enter Total floors" required>
+                        </div>
+                    </div>
+
+
+                    <button class="nextBtn">
+                        <span class="btnText">Next</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form second">
+                <div class="details address">
+                    <span class="title">Address Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Property address</label>
+                            <input type="text" placeholder="Permanent or Temporary" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>State</label>
+                            <input type="text" placeholder="Enter your state" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>City</label>
+                            <input type="text" placeholder="Enter your city" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Country</label>
+                            <input type="text" placeholder="Enter your country" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>carpet area</label>
+                            <input type="number" placeholder="Enter ward number" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Living Room</label>
+                            <input type="text" placeholder="No of living room" required>
+                        </div>
+
+                        <div class="input-field" style="width: 800px;">
+                            <label>Property description</label>
+                            <textarea name="description" maxlength="1000" class="input" required="" cols="20" rows="8"
+                                placeholder="write about property..." style="width: 800px;
+                                padding: 0 15px;
+                                border-radius: 5px;
+                                border: 1px solid #aaa;
+                                margin: 10px 0;"></textarea>
+                        </div>
+
+                        <div class="checkbox" style="margin-top: 8px;">
+                            <label>Aminities</label>
+                            <div class="box" style="margin: 5px 0;">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Surveillance cameras</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Elevator</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Air Conditioner</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Wifi</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Pool</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Gym</label>
+                                </div>
+                            </div>
+                            <div class="box" style="margin-left: 609px; margin-top: -136px;">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Balcony</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Parks</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Clubhouse</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Dog Park</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label" for="flexCheckDefault">Garage</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-field" style="margin-top: 20px;">
+                            <label>image 01</label>
+                            <input type="file" placeholder="" required style="padding: 0.4rem;">
+                        </div>
+                        <div class="input-field" style="margin-top: 20px;">
+                            <label>image 02</label>
+                            <input type="file" placeholder="" required style="padding: 0.4rem;">
+                        </div>
+                        <div class="input-field" style="margin-top: 20px;">
+                            <label>image 03</label>
+                            <input type="file" placeholder="" required style="padding: 0.4rem;">
+                        </div>
+                        <div class="input-field">
+                            <label>image 04</label>
+                            <input type="file" placeholder="" required style="padding: 0.4rem;">
+                        </div>
+                        <div class="input-field">
+                            <label>image 05</label>
+                            <input type="file" placeholder="" required style="padding: 0.4rem;">
+                        </div>
+                    </div>
+
+                    <div class="buttons">
+                        <div class="backBtn">
+                            <i class="uil uil-navigator"></i>
+                            <span class="btnText">Back</span>
+                        </div>
+                        <button class="sumbit">
+                            <span class="btnText">Submit</span>
+                            <i class="uil uil-navigator"></i>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--<script src="script.js"></script>-->
+    <script>
+        const form = document.querySelector("form"),
+            nextBtn = form.querySelector(".nextBtn"),
+            backBtn = form.querySelector(".backBtn"),
+            allInput = form.querySelectorAll(".first input");
+
+
+        nextBtn.addEventListener("click", () => {
+            allInput.forEach(input => {
+                if (input.value != "") {
+                    form.classList.add('secActive');
+                } else {
+                    form.classList.remove('secActive');
+                }
+            })
+        })
+
+        backBtn.addEventListener("click", () => form.classList.remove('secActive'));
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- else
+                            {
+                                $products = "SELECT tbl_houses.*,propertytypes.ptypes,propertytypes.id from tbl_houses join propertytypes on propertytypes.id=tbl_houses.ptype";
+    // $products = "SELECT tbl_houses.*,propertytypes.ptypes,propertytypes.id from tbl_houses join propertytypes on propertytypes.id=tbl_houses.ptype";
+    $products_run = mysqli_query($conn, $products);
+    if (mysqli_num_rows($products_run) > 0) {
+        foreach ($products_run as $proditems):
+    ?>
+
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="width: 50%;">
+                <div class="property-item rounded overflow-hidden">
+                    <div class="position-relative overflow-hidden">
+                        <a href="house-details.php?id=<?php echo $proditems['t_Id']; ?>"><img class="img-fluid"
+                                src="houselistImage/<?php echo $proditems['pimg1']; ?>" alt=""></a>
+                        <div
+                            class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
+                            For
+                            <?php echo $proditems['btype']; ?>
+                        </div>
+                        <div
+                            class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
+                            <?php echo $proditems['ptypes']; ?>
+                        </div>
+                    </div>
+                    <div class="p-4 pb-0">
+                        <h5 class="text-primary mb-3">$
+                            <?php echo $proditems['price']; ?>
+                        </h5>
+                        <a class="d-block h5 mb-2" href="house-details.php?id=<?php echo $proditems['t_Id']; ?>">
+                            <?php echo $proditems['pname']; ?>
+                        </a>
+                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i><?php echo $proditems['plocation']; ?>, <?php echo $proditems['city']; ?>, <?php echo $proditems['country']; ?></p>
+                    </div>
+                    <div class="d-flex border-top">
+                        <small class="flex-fill text-center border-end py-2"><i
+                                class="fa fa-ruler-combined text-primary me-2"></i><?php echo $proditems['Sqft']; ?> Sqft</small>
+                        <small class="flex-fill text-center border-end py-2"><i
+                                class="fa fa-bed text-primary me-2"></i><?php echo $proditems['Bedrooms']; ?> Bed</small>
+                        <small class="flex-fill text-center py-2"><i
+                                class="fa fa-bath text-primary me-2"></i><?php echo $proditems['Bathroom']; ?> Bath</small>
+                    </div>
+                </div>
+            </div>
+            <?php
+        endforeach;
+    } else {
+        echo "No Items Found";
+    }
+}
+                        ?> -->
